@@ -43,8 +43,11 @@
                 <input required name="image" class="form-control form-control-sm" type="file">
             </div>
 
-            <button type="submit" class="btn btn-primary btn-small m-3">Submit</button>
-
+            <div class="m-3 mt-4">
+              <button type="submit" class="btn btn-primary btn-small mr-2">Submit</button>
+              <button type="submit" class="btn btn-primary btn-small"
+                onclick="window.location='{% url 'gallery' %}' ; return false;">Cancel</button>
+            </div>
           </form>
         </div>
       </div>
