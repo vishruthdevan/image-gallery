@@ -23,8 +23,15 @@
                       Categories
                     </div>
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item"> 
+                            <a class="btn btn-dark btn-sm m-1" href="{% url 'gallery' %}">All</a> 
+                        </li>
+                        
                         {% for category in categories %}
-                        <li class="list-group-item">{{category.name}}</li>
+                            <li class="list-group-item">
+                                <a href="{% url 'gallery'%}?category={{category.name}}">{{category.name}}</a>
+                                
+                            </li>
                         {% endfor %}
                       
                       <a href="{% url 'add' %}" class="btn btn-dark btn-sm m-1">
@@ -51,6 +58,7 @@
                     </div>
                 {% empty %}
                 <h3 style="font-family: Arial, Helvetica, sans-serif;">No photos</h3>
+                <img src="https://media.giphy.com/media/6uGhT1O4sxpi8/giphy.gif" class="img-fluid m-4">
                 {% endfor %}
                 </div>
             </div>
