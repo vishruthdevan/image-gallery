@@ -11,7 +11,6 @@ def gallery(request):
     else:
         photos = Photo.objects.filter(category__name=category)
     context = {'categories' : categories, 'photos' : photos, 'category_name' : category}
-    print(reverse('photo', args=['69']))
     return render(request, 'photos/gallery.html', context)
 
 def addPhoto(request):
