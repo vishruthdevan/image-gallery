@@ -47,8 +47,15 @@ def viewPhoto(request, pk):
     return render(request, 'photos/photo.html', {'photo':photo})
 
 
-def deletePhoto(request, pk):
+def deleteCat(request):
+    if request.method == "POST":
+        category = Category.objects.get(id=request.POST.get('pk'))
+        category.delete()
+        return redirect(reverse('gallery'))
 
+
+
+def deletePhoto(request, pk):
     if request.method == "POST":
         photo = Photo.objects.get(id=pk)
         photo.delete()

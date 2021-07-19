@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block head %}
 <style>
     .image-thumbnail {
@@ -7,6 +9,11 @@
         width: 100%;
         object-fit: contain;
         object-position: center;
+    }
+
+    #image {
+        object-position: inherit;
+        object-fit: contain;
     }
 </style>
 {% endblock head %}
@@ -25,7 +32,7 @@
 
                     <div class="card-body">
                     
-                        <ul class="list-group">
+                        <ul class="list-group list-group-horizontal">
                             {% if category_name == None %}
                                 <a class="list-group-item m-1" style="background-color:mistyrose ;" href="{% url 'gallery'%}">
                                     All
@@ -35,29 +42,43 @@
                                     All
                                 </a>
                             {% endif %}
+                        </ul>
 
+                        
                             {% for category in categories %}
                                 {% if category.name == category_name %}
-                                    
+                                <ul class="list-group list-group-horizontal">
                                     <a class="list-group-item m-1"
                                     style="background-color: mistyrose;" 
                                     href="{% url 'gallery'%}?category={{category.name}}">
                                         {{category.name}}
                                     </a>
-
+                                    <form method="POST" action="{% url 'delete_cat' %}">
+                                        {% csrf_token %}
+                                        <input style="float: right;" type="image" src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" 
+                                        id="image" width="20" height="20" name='pk' value="{{ category.id}}">
+                                    </form>
+                                </ul>
                                 {% else %}
+                                <ul class="list-group list-group-horizontal">
                                     <a class="list-group-item m-1" 
                                     href="{% url 'gallery'%}?category={{category.name}}">
                                         {{category.name}}
                                     </a>
+                                    <form method="POST" action="{% url 'delete_cat' %}">
+                                        {% csrf_token %}
+                                        <input style="float: right;" type="image" src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" 
+                                        id="image" width="20" height="20" name='pk' value="{{category.id}}">
+                                    </form>
+                                </ul>
                                 {% endif %}
                                     
                             {% endfor %}
-                        </ul>
+                        
                     </div>   
                 </div>
                 <a href="{% url 'add' %}" class="btn btn-dark btn-sm m-1 mt-3">
-                        Add photo
+                    Add photo
                 </a> 
             </div>
 
@@ -73,8 +94,8 @@
                                 <p class="card-text">{{photo.description}}</p>
                             </div>
                             <span>
-                            <a id="#btnView" href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm">View</a>
-                            <a id="#btnDelete" href="{% url 'delete' photo.id %}" class="btn btn-outline-dark btn-sm">Delete</a>
+                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm">View</a>
+                            <a href="{% url 'delete' photo.id %}" class="btn btn-outline-dark btn-sm">Delete</a>
                             </span>
                         </div>
                     </div>
