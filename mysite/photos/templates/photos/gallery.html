@@ -11,9 +11,10 @@
         object-position: center;
     }
 
-    #image {
-        object-position: inherit;
-        object-fit: contain;
+    #del{
+        border: none;
+        margin: 0;
+        padding-top: 10px;
     }
 </style>
 {% endblock head %}
@@ -21,7 +22,7 @@
 {% block content %}
 
 <body class="m-5">
-
+    <p></p>
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6">
@@ -34,11 +35,11 @@
                     
                         <ul class="list-group list-group-horizontal">
                             {% if category_name == None %}
-                                <a class="list-group-item m-1" style="background-color:mistyrose ;" href="{% url 'gallery'%}">
+                                <a class="list-group-item m-1 flex-fill" style="background-color:mistyrose ;" href="{% url 'gallery'%}">
                                     All
                                 </a>
                             {% else %}
-                                <a class="list-group-item m-1" href="{% url 'gallery'%}">
+                                <a class="list-group-item m-1 flex-fill" href="{% url 'gallery'%}">
                                     All
                                 </a>
                             {% endif %}
@@ -47,28 +48,33 @@
                         
                             {% for category in categories %}
                                 {% if category.name == category_name %}
-                                <ul class="list-group list-group-horizontal">
-                                    <a class="list-group-item m-1"
+                                <ul class="list-group list-group-horizontal-sm">
+                                    <a class="list-group-item m-1 flex-fill"
                                     style="background-color: mistyrose;" 
                                     href="{% url 'gallery'%}?category={{category.name}}">
                                         {{category.name}}
                                     </a>
                                     <form method="POST" action="{% url 'delete_cat' %}">
                                         {% csrf_token %}
-                                        <input style="float: right;" type="image" src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" 
-                                        id="image" width="20" height="20" name='pk' value="{{ category.id}}">
+                                        <li id="del" class="list-group-item mt-1 flex-fill">
+                                            <input type="submit" name="pk" value=""
+                                            style="background-image: url('{%static 'photos/images/delete.png'%}');"/>
+                                        </li>
                                     </form>
                                 </ul>
                                 {% else %}
-                                <ul class="list-group list-group-horizontal">
-                                    <a class="list-group-item m-1" 
+                                <ul class="list-group list-group-horizontal-sm">
+                                    <a class="list-group-item m-1 flex-fill" 
                                     href="{% url 'gallery'%}?category={{category.name}}">
                                         {{category.name}}
                                     </a>
                                     <form method="POST" action="{% url 'delete_cat' %}">
                                         {% csrf_token %}
-                                        <input style="float: right;" type="image" src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" 
-                                        id="image" width="20" height="20" name='pk' value="{{category.id}}">
+                                        <li id="del" class="list-group-item mt-1 flex-fill">
+                                            <input type="submit" name="pk" value=""
+                                            style="background-image: url('{%static 'photos/images/delete.png'%}');"/>
+                                        </li>
+
                                     </form>
                                 </ul>
                                 {% endif %}
