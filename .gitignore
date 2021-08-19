@@ -351,3 +351,4 @@ MigrationBackup/
 image-gallery.code-workspace
 .vscode/launch.json
 env/*
+db.sqlite3
