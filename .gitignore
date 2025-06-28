@@ -352,4 +352,3 @@ mysite/mysite/secret.py
 image-gallery.code-workspace
 .vscode/launch.json
 mysite/db.sqlite3
-mysite/static/images/*
