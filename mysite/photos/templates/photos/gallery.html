@@ -8,6 +8,10 @@
         object-fit: contain;
         object-position: center;
     }
+
+    .active{
+
+    }
 </style>
 {% endblock head %}
 
@@ -19,31 +23,45 @@
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="background-color: dimgrey; color: floralwhite;">
                         Categories
                     </div>
 
                     <div class="card-body">
-                        <ul class="list-group list-group-flush">
-
-                            <a class="list-group-item list-group-item-action" href="{% url 'gallery'%}">
-                                All
-                            </a>
+                        <ul class="list-group">
+                            {% if category_name == None %}
+                                <a class="list-group-item m-1" style="background-color:mistyrose ;" href="{% url 'gallery'%}">
+                                    All
+                                </a>
+                            {% else %}
+                                <a class="list-group-item m-1" href="{% url 'gallery'%}">
+                                    All
+                                </a>
+                            {% endif %}
 
                             {% for category in categories %}
-                            <a class="list-group-item list-group-item-action"
-                                href="{% url 'gallery'%}?category={{category.name}}">
-                                {{category.name}}
-                            </a>
+                                {% if category.name == category_name %}
+                                    
+                                    <a class="list-group-item m-1"
+                                    style="background-color: mistyrose;" 
+                                    href="{% url 'gallery'%}?category={{category.name}}">
+                                        {{category.name}}
+                                    </a>
+
+                                {% else %}
+                                    <a class="list-group-item m-1" 
+                                    href="{% url 'gallery'%}?category={{category.name}}">
+                                        {{category.name}}
+                                    </a>
+                                {% endif %}
+                                    
                             {% endfor %}
-
-                            <a href="{% url 'add' %}" class="btn btn-dark btn-sm m-1">
-                                Add photo
-                            </a>
-
                         </ul>
-                    </div>
+                    </div>   
                 </div>
+                <a href="{% url 'add' %}" class="btn btn-dark btn-sm m-1 mt-3">
+                                Add photo
+                        </a> 
             </div>
 
 
@@ -71,6 +89,6 @@
     </div>
 </body>
 
-{% endblock content %}
 
-</html>
+
+{% endblock content %}
