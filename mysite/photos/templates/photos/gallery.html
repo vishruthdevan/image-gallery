@@ -16,6 +16,18 @@
         margin: 0;
         padding-top: 10px;
     }
+
+    #submit-icon {
+        background-image: url("{% static 'photos/images/delete.jpg' %}");
+        background-size: cover;
+        border: none;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        color: transparent;
+        position: relative;
+        margin-left: -10px;
+    }
 </style>
 {% endblock head %}
 
@@ -57,8 +69,7 @@
                                     <form method="POST" action="{% url 'delete_cat' %}">
                                         {% csrf_token %}
                                         <li id="del" class="list-group-item mt-1 flex-fill">
-                                            <input type="submit" name="pk" value=""
-                                            style="background-image: url('{%static 'photos/images/delete.png'%}');"/>
+                                            <input type="submit" name="pk" value="{{category.id}}" id="submit-icon"/>
                                         </li>
                                     </form>
                                 </ul>
@@ -71,8 +82,7 @@
                                     <form method="POST" action="{% url 'delete_cat' %}">
                                         {% csrf_token %}
                                         <li id="del" class="list-group-item mt-1 flex-fill">
-                                            <input type="submit" name="pk" value=""
-                                            style="background-image: url('{%static 'photos/images/delete.png'%}');"/>
+                                            <input type="submit" name="pk" value="{{category.id}}" id="submit-icon"/>
                                         </li>
 
                                     </form>
