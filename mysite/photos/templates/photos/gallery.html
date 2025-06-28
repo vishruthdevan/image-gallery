@@ -8,10 +8,6 @@
         object-fit: contain;
         object-position: center;
     }
-
-    .active{
-
-    }
 </style>
 {% endblock head %}
 
@@ -61,8 +57,8 @@
                     </div>   
                 </div>
                 <a href="{% url 'add' %}" class="btn btn-dark btn-sm m-1 mt-3">
-                                Add photo
-                        </a> 
+                        Add photo
+                </a> 
             </div>
 
 
@@ -76,7 +72,10 @@
                             <div class="card-body">
                                 <p class="card-text">{{photo.description}}</p>
                             </div>
-                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                            <span>
+                            <a id="#btnView" href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm">View</a>
+                            <a id="#btnDelete" href="{% url 'delete' photo.id %}" class="btn btn-outline-dark btn-sm">Delete</a>
+                            </span>
                         </div>
                     </div>
                     {% empty %}

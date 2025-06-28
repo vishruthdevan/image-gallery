@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Category, Photo
@@ -12,6 +13,7 @@ def gallery(request):
         photos = Photo.objects.filter(category__name=category)
     context = {'categories' : categories, 'photos' : photos, 'category_name' : category}
     return render(request, 'photos/gallery.html', context)
+
 
 def addPhoto(request):
     categories = Category.objects.all()
@@ -39,6 +41,19 @@ def addPhoto(request):
     context = {'categories' : categories,}
     return render(request, 'photos/add.html', context)
 
+
 def viewPhoto(request, pk):
     photo = Photo.objects.get(id=pk)
     return render(request, 'photos/photo.html', {'photo':photo})
+
+
+def deletePhoto(request, pk):
+
+    if request.method == "POST":
+        photo = Photo.objects.get(id=pk)
+        photo.delete()
+        return redirect(reverse('gallery'))
+    
+    photo = Photo.objects.get(id=pk)
+    context = {'photo' : photo,}
+    return render(request, 'photos/delete.html', context)
