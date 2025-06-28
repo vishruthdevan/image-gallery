@@ -352,3 +352,4 @@ image-gallery.code-workspace
 .vscode/launch.json
 db.sqlite3
 media/*
+env/*
